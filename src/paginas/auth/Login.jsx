@@ -14,7 +14,7 @@ export const Login = () => {
   const dispatch = useDispatch(); 
   //const auth = useSelector((state) => state.auth);
 
-  const [login] = useLoginMutation()
+  const [login, {isLoading}] = useLoginMutation()
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -65,7 +65,7 @@ export const Login = () => {
               className="w-4 h-4" />
             Ingresar con google
           </button>
-          <div className="relative mb-4">
+          <div className="relative mb-4"> 
             <RiMailFill className="absolute top-1/2 -translate-y-1/2 left-2 text-secundary-buton" />
             <input
               type="email"
@@ -89,10 +89,19 @@ export const Login = () => {
           <div>
 
             <button
+              disabled={isLoading || !usuario}
               type="submit"
               className="bg-secundary-buton w-full py-2 px-4 rounded-lg hover:text-gray-100 transition-colors"
             >
-              Ingresar
+              {isLoading ? (
+                <>
+                  <div className="w-5 h-5 border-t-2 border-b-2 border-white rounded-full animate-spin"></div>
+                  <span className="ml-2">Iniciando Sesión...</span>
+                </>
+              ) : (
+                "Iniciar Sesión"
+              )
+              }
             </button>
 
           </div>
